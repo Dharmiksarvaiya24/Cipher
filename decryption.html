@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Decryption</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#decryptedText {
+    resize: none;
+}
+
+.copy-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Decryption</h1>
+        <label for="encryptedText">Encrypted Text:</label>
+        <input type="text" id="encryptedText" name="encryptedText">
+        <label for="shift">Shift (Key):</label>
+        <input type="number" id="shift" name="shift" min="1" max="25" value="3">
+        <button onclick="decrypt()">Decrypt</button>
+        <textarea id="decryptedText" rows="5" readonly></textarea>
+        <button class="copy-btn" onclick="copyToClipboard()">Copy Decrypted Text</button>
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function decrypt() {
+    var encryptedText = document.getElementById("encryptedText").value;
+    var shift = parseInt(document.getElementById("shift").value);
+
+    if (encryptedText === "") {
+        alert("Please enter some text to decrypt.");
+        return;
+    }
+
+    var decryptedText = "";
+    for (var i = 0; i < encryptedText.length; i++) {
+        var charCode = encryptedText.charCodeAt(i);
+        var isUpperCase = false;
+
+        if (charCode >= 65 && charCode <= 90) {
+            isUpperCase = true;
+        }
+
+        if (charCode >= 65 && charCode <= 90 || charCode >= 97 && charCode <= 122) {
+            var shiftedCharCode = charCode - (shift % 26);
+            if (isUpperCase) {
+                if (shiftedCharCode < 65) {
+                    shiftedCharCode += 26;
+                }
+            } else {
+                if (shiftedCharCode < 97) {
+                    shiftedCharCode += 26;
+                }
+            }
+            decryptedText += String.fromCharCode(shiftedCharCode);
+        } else {
+            decryptedText += encryptedText.charAt(i);
+        }
+    }
+
+    document.getElementById("decryptedText").value = decryptedText;
+}
+
+function copyToClipboard() {
+    var textarea = document.getElementById("encryptedText");
+    textarea.select();
+    document.execCommand("copy");
+    alert("Copied");
+}
+
+function goBack() {
+    window.history.back();
+}   
+    </script>
+</body>
+</html>

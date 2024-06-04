@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Encryption/Decryption</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+center {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4caf19;
+}
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Welcome to E/D Tool </h1>
+        <h3>END-to-END privacy</h3>
+    </center>
+    <center>
+        <button onclick="encryption()">Encryption</button>
+        <button onclick="decryption()">Decryption</button>
+    </center>
+
+    <script>
+        function encryption() {
+    window.location.href = 'encryption.html';
+}
+
+function decryption() {
+    window.location.href = "decryption.html";
+}
+    </script>
+</body>
+</html>
